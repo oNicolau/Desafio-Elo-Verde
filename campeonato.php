@@ -64,27 +64,32 @@ include 'FootballData.php';
   <main role="main">
 
     <div class="container">
-      <h1>Competições</h1>
+      <h1>Times do campeonato selecionado</h1>
     </div>
 
-                <?php $api = new FootballData();
-                echo "<p><hr><p>"; ?>
-                <h4>Times do Campeonato</h4>
-                <table class="table table-striped">
-                    <tr>
-                    <th>Position</th>
-                    <th>TeamName</th>
-                    </tr>
-                    <?php foreach ($api->findStandingsByCompetition(2021)->standings as $standing) { 
-                          if ($standing->type == 'TOTAL') { 
-                              foreach ($standing->table as $standingRow) {
-                    ?>
-                    <tr>
-                      <td><?php echo $standingRow->position; ?></td>
-                      <td><?php echo $standingRow->team->name; ?></td>
-                      <td><button type="button" class="btn btn-dark">Ver</button></td>
-                    </tr>
-                    <?php }}} ?>
-                    <tr>
-                    </tr>
-                </table>
+    //Aqui devería mostrar a os times que participam de cada campeonato
+    <?php $api = new FootballData();
+    echo "<p><hr><p>"; ?>
+    <h4>Times do Campeonato</h4>
+    <table class="table table-striped">
+      <tr>
+        <th>Position</th>
+        <th>TeamName</th>
+      </tr>
+      <?php foreach ($api->findStandingsByCompetition(2021)->standings as $standing) {
+        if ($standing->type == 'TOTAL') {
+          foreach ($standing->table as $standingRow) {
+      ?>
+            <tr>
+              <td><?php echo $standingRow->position; ?></td>
+              <td><?php echo $standingRow->team->name; ?></td>
+              <td><button type="button" class="btn btn-dark">Ver</button></td>
+            </tr>
+      <?php }
+        }
+      } ?>
+      <tr>
+      </tr>
+    </table>
+</body>
+</html>
